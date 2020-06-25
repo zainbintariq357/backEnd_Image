@@ -8,25 +8,48 @@ import DefaultImg from './assets/default-img.jpg';
 function ImageHook () {
 	const [product, setProduct] = useState({main_image: DefaultImg, thumb_image: DefaultImg}); 	
 	const uploadMainImage= (e) => {
-		let reader = new FileReader();
-		let main_image =e.target.files[0];
-		console.log('The main_image is now', main_image);
-		reader.onloadend = () =>{
-			setProduct({...product, main_image: URL.createObjectURL(main_image)})	
-		}
-		reader.readAsDataURL(main_image);
+		
+		let main_image = new FormData();
+		
+		main_image.append('imageName',"multer-image" + Date.now())
+    main_image.append('imageData', e.target.files[0])
+		setProduct({...product, main_image: main_image})
+		
+		// this.setState({
+    //   formData: {
+    //     multerImage: URL.createObjectURL(e.target.files[0])
+    //   }
+    // })
+		// let reader = new FileReader();
+		// let main_image =e.target.files[0];
+		// console.log('The main_image is now', main_image);
+		// reader.onloadend = () =>{
+		// 	setProduct({...product, main_image: URL.createObjectURL(main_image)})	
+		// }
+		// reader.readAsDataURL(main_image);
 	}
 
 	const uploadThumbImage = (e)=>{
 		alert('its coming')
-		let reader= new FileReader();
-		let thumb_image = e.target.files[0];
-		console.log('The thumb_images are now', thumb_image);
-		reader.onloadend = () =>{
-			setProduct({...product, thumb_image: URL.createObjectURL(thumb_image)})
-		}
-		reader.readAsDataURL(thumb_image)
-	}
+		let thumb_image = new FormData();
+		thumb_image.append('imageName1',"multer-image1" + Date.now())
+		thumb_image.append('imageData1', e.target.files[0])
+		setProduct({...product, thumb_image: thumb_image})
+	}		
+		// this.setState({
+      //   formData :{
+      //     multerImage_Thumb: URL.createObjectURL(e.target.files[0])
+      //   }
+      // }); 
+     
+	// 	let reader= new FileReader();
+	// 	let thumb_image = e.target.files[0];
+	// 	console.log('The thumb_images are now', thumb_image);
+	// 	reader.onloadend = () =>{
+	// 		setProduct({...product, thumb_image: URL.createObjectURL(thumb_image)})
+	// 	}
+	// 	reader.readAsDataURL(thumb_image)
+	// }
 	const saveData = (e) =>{
 		e.preventDefault()
 		axios.post('http://localhost:3001/api/uploadmulter',product)
