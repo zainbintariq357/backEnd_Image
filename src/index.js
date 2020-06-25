@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+// import App from './App';
+// import HookCounter from './App';
+import ImageHook from './App3';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <ImageHook />
+    {/* <HookCounter /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
